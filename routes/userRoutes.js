@@ -14,15 +14,15 @@ router.get("/", (req, res) => {
     res.render('../views/userViews/homepage.ejs', { navbarLinks }); 
 });
 
-router.get("/contact", (req, res) => {
+router.get("/today", (req, res) => {
     res.render('../views/userViews/today.ejs', { navbarLinks });
 });
 
-router.get("/about", (req, res) => { 
+router.get("/thismonth", (req, res) => { 
     res.render('../views/userViews/thismonth.ejs', { navbarLinks }); 
 });
 
-router.get("/whereami", (req, res) => {
+router.get("/thisyear", (req, res) => {
     res.render('../views/userViews/thisyear.ejs', { navbarLinks });
 });
 
