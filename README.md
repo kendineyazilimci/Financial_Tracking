@@ -1,6 +1,6 @@
 # 💰 Finansal Takip Sistemi
 
-Kişisel gelir ve giderlerinizi günlük, aylık ve yıllık olarak takip etmenizi sağlayan, modern ve karanlık tema (dark mode) arayüze sahip web tabanlı bir finans uygulaması.
+Kişisel gelir ve giderlerinizi günlük, aylık ve yıllık olarak takip etmenizi sağlayan web tabanlı bir finans uygulaması.
 
 ## 📸 Ekran Görüntüleri
 
@@ -27,8 +27,8 @@ Günlük gelir ve giderlerin listelendiği, gün sonu bakiyesinin hesaplandığ�
 ## 🛠️ Kullanılan Teknolojiler
 
 * **Backend:** Node.js, Express.js
-* **Frontend:** EJS (Template Engine), CSS3
-* **Veritabanı:** MySQL (veya kullandığın veritabanı neyse buraya yazabilirsin)
+* **Frontend:** EJS (Template Engine), CSS  
+* **Veritabanı:** Şu Anlık Kod İçerisinde Örnek Veriler.
 
 ## 🚀 Kurulum
 
@@ -46,4 +46,3 @@ Projeyi bilgisayarınızda çalıştırmak için şu adımları izleyin:
 4.  Tarayıcınızda `http://localhost:3000` adresine gidin.
 
 ---
-**Geliştirici:** [Adın Soyadın]
