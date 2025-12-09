@@ -13,11 +13,12 @@ body {
     font-family: var(--font-main);
     margin: 0;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .hero-wrapper {
     position: relative;
-    height: 100vh;
+    height: calc(100vh - 100px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,12 +51,17 @@ body {
     height: 400px;
     background: var(--accent-2);
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    animation-delay: -5s; /* Farklı zamanda başlasın */
+    animation-delay: -5s;
 }
 
 @keyframes float {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(50px, 50px) rotate(20deg); }
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(50px, 50px) rotate(20deg);
+    }
 }
 
 .hero-content {
@@ -115,6 +121,12 @@ body {
 }
 
 @media (max-width: 768px) {
-    .hero-title { font-size: 2.5rem; }
-    .blob { width: 200px; height: 200px; }
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .blob {
+        width: 200px;
+        height: 200px;
+    }
 }

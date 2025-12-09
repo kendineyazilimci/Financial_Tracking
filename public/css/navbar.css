@@ -1,26 +1,23 @@
 nav {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    padding: 1.5rem 3rem;
+    height: 100px;
+    padding: 0 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
     box-sizing: border-box;
+    background: rgba(13, 17, 23, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-nav .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #fff;
-    text-decoration: none;
-    letter-spacing: 1px;
-}
-
-nav .logo span {
-    color: #58a6ff;
+nav .logo img {
+    height: 80px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 20px;
 }
 
 nav ul {
@@ -35,19 +32,25 @@ nav ul li a {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.3s ease;
+    font-size: larger;
+    transition: all 0.3s ease;
 }
 
 nav ul li a:hover {
     color: #fff;
-    text-shadow: 0 0 10px rgba(88, 166, 255, 0.6);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+    
 }
 
 @media (max-width: 768px) {
     nav {
-        padding: 1rem;
-        flex-direction: column;
+        height: 60px;
+        padding: 0 20px;
+        flex-direction: row;
+    }
+
+    nav ul {
         gap: 15px;
+        font-size: 0.8rem;
     }
 }
