@@ -13,7 +13,9 @@
 <body>
 
     <%- include('../partials/navbar') %>
-
+    <% const dbCRUD = require('../../dbProcesses/dbCRUD')  %> 
+    <% const expenses = dbCRUD.dbQuery.selectExpenses %> 
+    <% const incomes = dbCRUD.dbQuery.selectIncomes %> 
     <div class="todayContent">
         <div class="todayExpenses">
             <h1>Toplam Giderler</h1>
