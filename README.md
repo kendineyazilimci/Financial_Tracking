@@ -15,6 +15,11 @@ Günlük gelir ve giderlerin listelendiği, gün sonu bakiyesinin hesaplandığ�
 ![Günlük Takip Görseli](/public/images/ss2.png)
 ![Günlük Takip Görseli](/public/images/ss3.png)
 
+### Kayıt Ol ve Giriş Yap
+Kullanıcı kayıtları için kayıt ol ve giriş yap sayfaları.
+![Kayıt Ol](/public/images/ss4.png)
+![Giriş Yap](/public/images/ss5.png)
+
 ---
 
 ## ✨ Özellikler
