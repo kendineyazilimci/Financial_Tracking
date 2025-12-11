@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+    <%- include('../partials/navbar') %> 
+    <div class="loginContainer">
+        <div class="loginText">
+            <h1>Giriş Yap</h1>
+            <p>Zaten bir hesabınız var mı? <a href="/signup">Sign Up</a></p>
+        </div>
+        <div class="loginForm">
+            <form action="/login" method="post" class="loginForm">
+                <input type="email" placeholder="Email" name="email" class="emailInput">
+
+                <input type="password" placeholder="Password" name="password" class="passwordInput">
+
+                <button type="submit" class="loginButtonInput">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

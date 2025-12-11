@@ -13,59 +13,57 @@
 <body>
 
     <%- include('../partials/navbar') %>
-    <% const dbCRUD = require('../../dbProcesses/dbCRUD')  %> 
-    <% const expenses = dbCRUD.dbQuery.selectExpenses %> 
-    <% const incomes = dbCRUD.dbQuery.selectIncomes %> 
-    <div class="todayContent">
-        <div class="todayExpenses">
-            <h1>Toplam Giderler</h1>
-            <% expenses.forEach(expense=> { %>
-                <div class="todayExpense">
 
-                    <h2 class="description">
-                        <%= expense.description %>
-                    </h2>
-                    
-                    <h2 class="amount">
-                        <%= expense.amount %> TL
-                    </h2>
-                    
-                </div>
-            <% }) %>
-        </div>
-        <div class="todayIncomes">
-            <h1>Toplam Gelirler</h1>
-            <% incomes.forEach(income=> { %>
-                <div class="todayIncome">
+        <div class="todayContent">
+            <div class="todayExpenses">
+                <h1>Toplam Giderler</h1>
+                <% expenses.forEach(expense=> { %>
+                    <div class="todayExpense">
 
-                    <h2 class="description">
-                        <%= income.description %>
-                    </h2>
-                    
-                    <h2 class="amount">
-                        <%= income.amount %> TL
-                    </h2>
-                    
+                        <h2 class="description">
+                            <%= expense.description %>
+                        </h2>
+
+                        <h2 class="amount">
+                            <%= expense.amount %> TL
+                        </h2>
+
+                    </div>
+                    <% }) %>
+            </div>
+            <div class="todayIncomes">
+                <h1>Toplam Gelirler</h1>
+                <% incomes.forEach(income=> { %>
+                    <div class="todayIncome">
+
+                        <h2 class="description">
+                            <%= income.description %>
+                        </h2>
+
+                        <h2 class="amount">
+                            <%= income.amount %> TL
+                        </h2>
+
+                    </div>
+                    <% }) %>
+            </div>
+            <div class="endOfTheDay">
+                <h1>Gün Sonu Kalan</h1>
+                <div class="endOfTheDayContent">
+                    <h1>
+                        <% let totalExpenses=0; %>
+                            <% expenses.forEach(expenseAmount=> { %>
+                                <% totalExpenses +=expenseAmount.amount %>
+                                    <% }) %>
+                                        <% let totalIncomes=0; %>
+                                            <% incomes.forEach(incomeAmount=> { %>
+                                                <% totalIncomes +=incomeAmount.amount %>
+                                                    <% }) %>
+                                                        <%= totalIncomes - totalExpenses %> TL
+                    </h1>
                 </div>
-            <% }) %>
-        </div>
-        <div class="endOfTheDay">
-            <h1>Gün Sonu Kalan</h1>
-            <div class="endOfTheDayContent">
-                <h1>
-                    <% let totalExpenses = 0; %>
-                    <% expenses.forEach(expenseAmount => { %>
-                        <% totalExpenses += expenseAmount.amount %>
-                    <% }) %>
-                    <% let totalIncomes = 0; %>
-                    <% incomes.forEach(incomeAmount => { %>
-                        <% totalIncomes += incomeAmount.amount %>
-                    <% }) %>
-                    <%= totalIncomes - totalExpenses %> TL
-                </h1>
             </div>
         </div>
-    </div>
 
 </body>
 

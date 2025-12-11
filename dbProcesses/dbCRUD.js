@@ -1,10 +1,10 @@
-const {mongoose} = require('./dbConnection');
-const {usersSchema, expenseSchema, incomeSchema } = require('./dbConfig');
+const { mongoose } = require('./dbConnection');
+const { usersSchema, expenseSchema, incomeSchema } = require('./dbConfig');
 const Users = mongoose.model('Users', usersSchema, "users");
 const Expense = mongoose.model('Expense', expenseSchema, "expenses");
 const Income = mongoose.model('Income', incomeSchema, "incomes");
 
-async function addUser(id, name,surname,email,password,role) {
+async function addUser(id, name, surname, email, password) {
     try {
         const newUser = new Users({
             userId: id,
@@ -12,7 +12,6 @@ async function addUser(id, name,surname,email,password,role) {
             userSurname: surname,
             userEmail: email,
             userPassword: password,
-            userRole: role,
             userJoinDate: new Date()
         });
 
