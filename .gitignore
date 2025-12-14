@@ -1,2 +1,2 @@
 node_modules
-/dbProcesses/dbConfig.js
+config/db.js

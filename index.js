@@ -1,17 +1,20 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
-const path = require('path');
-const userRoutes = require('./routes/userRoutes');
+const connectDB = require('./config/db');
+const { addUser, getUser } = require('./controllers/userController');
+const { addExpense, getUserExpenses } = require('./controllers/expenseController');
+const { addIncome, getUserIncomes } = require('./controllers/incomeController');
 
+const port = process.env.PORT || 3000;
+
+connectDB().then(async () => {
+
+    await getUserExpenses(1);
+    await getUserIncomes(1);
+    await getUser(1);
+    app.listen(port, () => {
+        console.log(`Sunucu ${port} portunda çalışıyor`);
+    });
+});
 
 app.set('view engine', 'ejs');
-
-app.use("/libs", express.static(path.join(__dirname, "node_modules")));
-app.use(express.static(path.join(__dirname, "public")));
-
-app.use(userRoutes);
-
-app.listen(port, () => {
-  console.log(`Server is running at port ${port}`);
-});
