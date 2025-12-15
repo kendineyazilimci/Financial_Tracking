@@ -1,27 +1,21 @@
-/* --- GENEL AYARLAR VE DEĞİŞKENLER --- */
 :root {
-    /* Ana zemin rengi: Neredeyse siyah */
+
     --main-bg-color: #020205;
-    
-    /* AMBIENT IŞIKLAR: Mavi ve Mor spotlar */
-    --glow-blue: radial-gradient(circle at 15% 25%, rgba(0, 100, 255, 0.25) 0%, transparent 45%);
-    --glow-purple: radial-gradient(circle at 85% 40%, rgba(140, 0, 255, 0.25) 0%, transparent 50%);
-    
-    /* Form Kutusu ve Renkler */
-    --glass-bg: rgba(20, 20, 25, 0.6); 
+
+
+    --glass-bg: rgba(20, 20, 25, 0.6);
     --border-color: rgba(255, 255, 255, 0.08);
-    --neon-blue: #2563eb; 
+    --neon-blue: #2563eb;
     --text-color: #ffffff;
 }
 
 body {
     background-color: var(--main-bg-color);
-    /* Işık efektlerini burada uyguluyoruz */
     background-image: var(--glow-blue), var(--glow-purple);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    
+
     color: var(--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -31,7 +25,7 @@ body {
     flex-direction: column;
 }
 
-/* Link Ayarları */
+
 a {
     text-decoration: none;
     color: var(--neon-blue);
@@ -44,19 +38,19 @@ a:hover {
     text-shadow: 0 0 10px var(--neon-blue);
 }
 
-/* --- LOGIN KONTEYNER (CAM EFEKTİ) --- */
+
 .loginContainer {
     display: flex;
     flex-direction: column;
     max-width: 450px;
     width: 90%;
-    margin: auto; 
+    margin: auto;
     padding: 40px;
     gap: 20px;
     align-items: center;
     justify-content: center;
-    
-    /* Glassmorphism Ayarları */
+
+
     background: var(--glass-bg);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -65,14 +59,14 @@ a:hover {
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
 }
 
-/* --- BAŞLIK VE METİN --- */
+
 .loginText {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    background-color: transparent; 
+    background-color: transparent;
 }
 
 .loginText h1 {
@@ -89,7 +83,7 @@ a:hover {
     color: #aaa;
 }
 
-/* --- FORM ALANI --- */
+
 .loginForm {
     display: flex;
     flex-direction: column;
@@ -97,19 +91,19 @@ a:hover {
     justify-content: center;
     width: 100%;
     gap: 15px;
-    background-color: transparent; 
+    background-color: transparent;
     padding: 0;
 }
 
-/* --- INPUTLAR --- */
-.emailInput, 
+
+.emailInput,
 .passwordInput {
     width: 100%;
     padding: 15px 20px;
     border-radius: 50px;
     box-sizing: border-box;
-    
-    background: rgba(0, 0, 0, 0.4); 
+
+    background: rgba(0, 0, 0, 0.4);
     border: 1px solid var(--border-color);
     color: white;
     font-size: 1rem;
@@ -121,7 +115,7 @@ a:hover {
     color: rgba(255, 255, 255, 0.3);
 }
 
-.emailInput:focus, 
+.emailInput:focus,
 .passwordInput:focus {
     background: rgba(0, 0, 0, 0.6);
     border-color: var(--neon-blue);
@@ -129,7 +123,7 @@ a:hover {
     transform: scale(1.02);
 }
 
-/* --- BUTON --- */
+
 .loginButtonInput {
     width: 100%;
     padding: 15px;

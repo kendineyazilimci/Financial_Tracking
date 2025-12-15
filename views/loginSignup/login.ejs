@@ -13,15 +13,26 @@
     <div class="loginContainer">
         <div class="loginText">
             <h1>Giriş Yap</h1>
-            <p>Zaten bir hesabınız var mı? <a href="/signup">Sign Up</a></p>
+            <p>Hesabınız Yok Mu? <a href="/signup">Kayıt Ol</a></p>
         </div>
         <div class="loginForm">
+            <% if (successMessage && successMessage.length > 0) { %>
+                <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px; text-align: center;">
+                    <%= successMessage %>
+                </div>
+            <% } %>
+
+            <% if (errorMessage && errorMessage.length > 0) { %>
+                <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 15px; border-radius: 5px; text-align: center;">
+                    <%= errorMessage %>
+                </div>
+            <% } %>
             <form action="/login" method="post" class="loginForm">
-                <input type="email" placeholder="Email" name="email" class="emailInput">
+                <input type="email" placeholder="Email" name="userEmail" class="emailInput">
 
-                <input type="password" placeholder="Password" name="password" class="passwordInput">
+                <input type="password" placeholder="Password" name="userPassword" class="passwordInput">
 
-                <button type="submit" class="loginButtonInput">Login</button>
+                <button type="submit" class="loginButtonInput">Giriş Yap</button>
             </form>
         </div>
     </div>

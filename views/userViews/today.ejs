@@ -8,63 +8,109 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/today.css">
     <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
     <%- include('../partials/navbar') %>
 
-        <div class="todayContent">
-            <div class="todayExpenses">
-                <h1>Toplam Giderler</h1>
-                <% expenses.forEach(expense=> { %>
-                    <div class="todayExpense">
+    <div class="page-wrapper">
 
-                        <h2 class="description">
-                            <%= expense.description %>
-                        </h2>
-
-                        <h2 class="amount">
-                            <%= expense.amount %> TL
-                        </h2>
-
+        <aside class="sidebar">
+            
+            <div class="form-box income-form-box">
+                <h3>Gelir Ekle</h3>
+                <form action="/add-income" method="POST">
+                    <div class="input-group">
+                        <i class="fa-solid fa-tag"></i>
+                        <input type="text" name="category" placeholder="Kategori (İsteğe bağlı)">
                     </div>
-                    <% }) %>
-            </div>
-            <div class="todayIncomes">
-                <h1>Toplam Gelirler</h1>
-                <% incomes.forEach(income=> { %>
-                    <div class="todayIncome">
-
-                        <h2 class="description">
-                            <%= income.description %>
-                        </h2>
-
-                        <h2 class="amount">
-                            <%= income.amount %> TL
-                        </h2>
-
+                    <div class="input-group">
+                        <i class="fa-solid fa-pen"></i>
+                        <input type="text" name="description" placeholder="Açıklama (örn: Maaş)" required>
                     </div>
-                    <% }) %>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lira-sign"></i>
+                        <input type="number" name="amount" placeholder="Tutar" required>
+                    </div>
+                    <button type="submit" class="btn-income">Gelir Ekle</button>
+                </form>
             </div>
-            <div class="endOfTheDay">
+
+            <div class="form-box expense-form-box">
+                <h3>Harcama Ekle</h3>
+                <form action="/add-expense" method="POST">
+                    <div class="input-group">
+                        <i class="fa-solid fa-tag"></i>
+                        <input type="text" name="category" placeholder="Kategori (İsteğe bağlı)">
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-utensils"></i>
+                        <input type="text" name="description" placeholder="Açıklama (örn: Yemek)" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lira-sign"></i>
+                        <input type="number" name="amount" placeholder="Tutar" required>
+                    </div>
+                    <button type="submit" class="btn-expense">Gider Ekle</button>
+                </form>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+            
+            <div class="content-section endOfTheDay">
                 <h1>Gün Sonu Kalan</h1>
                 <div class="endOfTheDayContent">
-                    <h1>
-                        <% let totalExpenses=0; %>
-                            <% expenses.forEach(expenseAmount=> { %>
-                                <% totalExpenses +=expenseAmount.amount %>
-                                    <% }) %>
-                                        <% let totalIncomes=0; %>
-                                            <% incomes.forEach(incomeAmount=> { %>
-                                                <% totalIncomes +=incomeAmount.amount %>
-                                                    <% }) %>
-                                                        <%= totalIncomes - totalExpenses %> TL
+                    <% let balance = totalIncome - totalExpense; %>
+                    <h1 class="<%= balance >= 0 ? 'positive-balance' : 'negative-balance' %>">
+                        <%= balance %> TL
                     </h1>
                 </div>
             </div>
-        </div>
+
+            <div class="content-section todayIncomes">
+                <h1>Toplam Gelirler</h1>
+                <div class="list-container">
+                    <% if (incomes && incomes.length > 0) { %>
+                        <% incomes.forEach(income => { %>
+                            <div class="item-card income-card">
+                                <div class="card-left">
+                                    <h2 class="description"><%= income.description %></h2>
+                                    <span class="category-badge"><%= income.category || 'Genel' %></span>
+                                </div>
+                                <h2 class="amount">+<%= income.amount %> TL</h2>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p class="empty-message">Bugün için gelir girişi yok.</p>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="content-section todayExpenses">
+                <h1>Toplam Giderler</h1>
+                <div class="list-container">
+                    <% if (expenses && expenses.length > 0) { %>
+                        <% expenses.forEach(expense => { %>
+                            <div class="item-card expense-card">
+                                <div class="card-left">
+                                    <h2 class="description"><%= expense.description %></h2>
+                                    <span class="category-badge"><%= expense.category || 'Genel' %></span>
+                                </div>
+                                <h2 class="amount">-<%= expense.amount %> TL</h2>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p class="empty-message">Bugün için harcama yok.</p>
+                    <% } %>
+                </div>
+            </div>
+
+        </main>
+    </div>
 
 </body>
-
 </html>

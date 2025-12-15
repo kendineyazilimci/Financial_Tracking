@@ -31,7 +31,28 @@ const getUserExpenses = async (userId) => {
     }
 };
 
+const getTodayExpenses = async (userId) => {
+    try {
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999);
+
+        const expenses = await Expense.find({
+            userId: userId,
+            createdAt: { $gte: startOfDay, $lte: endOfDay }
+        });
+
+        return expenses;
+    } catch (error) {
+        console.error('Bugünün harcamaları çekilirken hata:', error.message);
+        return [];
+    }
+};
+
 module.exports = {
     addExpense,
-    getUserExpenses
+    getUserExpenses,
+    getTodayExpenses
 };

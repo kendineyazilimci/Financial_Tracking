@@ -1,7 +1,12 @@
 :root {
     --bg-color: #0d1117;
-    --text-main: #ffffff;
+    --bg-secondary: #161b22;
+    --bg-tertiary: #21262d;
+    --text-main: #e6edf3;
     --text-muted: #8b949e;
+    --border-color: #30363d;
+    --accent-green: #238636;
+    --accent-red: #da3633;
     --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -11,101 +16,185 @@ body {
     font-family: var(--font-main);
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
 }
 
-h1 {
-    margin: auto;
-    text-align: center;
-    margin-bottom: 15px;
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+    pointer-events: none;
 }
 
-.todayContent {
-    display: flex;
-    flex-direction: column;
+
+nav,
+.navbar,
+#navbar {
+    position: relative !important;
+    top: auto !important;
+    width: 100%;
+    z-index: 1000;
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+
+    margin: 0;
+}
+
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+
+.page-wrapper {
+    display: grid;
+    grid-template-columns: 350px 1fr;
     gap: 30px;
-    width: 65%;
-    margin: 40px auto;
-    padding: 40px;
-    background-color: rgba(0, 0, 0, 0.363);
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+
+
+    padding-top: 40px;
+    padding-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: start;
 }
 
-.todayExpenses {
+.sidebar {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: rgba(255, 74, 74, 0.2);
-    padding: 20px;
-    border-radius: 10px;
-    width: 100%;
-    box-sizing: border-box;
+    position: sticky;
+    top: 20px;
 }
 
-.todayExpense {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(200, 40, 40);
-    padding: 15px 20px;
-    border-radius: 8px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.todayIncomes {
+.main-content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background-color: rgba(0, 130, 0, 0.2);
+    gap: 25px;
+}
+
+.form-box,
+.content-section {
+    background-color: var(--bg-secondary);
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.form-box input {
     width: 100%;
+    padding: 12px 10px 12px 35px;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-main);
+    font-size: 0.95rem;
     box-sizing: border-box;
 }
 
-.todayIncome {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(40, 160, 40);
-    padding: 15px 20px;
-    border-radius: 8px;
+.form-box button {
     width: 100%;
-    box-sizing: border-box;
-}
-
-.endOfTheDay {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.endOfTheDayContent {
-    background-color: transparent;
-    padding: 10px;
-}
-
-.description {
-    margin: 0;
-    font-size: 1.1rem;
-}
-
-.amount {
-    margin: 0;
+    padding: 12px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
     font-weight: bold;
+    cursor: pointer;
 }
 
-@media (max-width: 768px) {
-    .todayContent {
-        width: 95%;
-        padding: 20px;
+.btn-income {
+    background-color: var(--accent-green);
+}
+
+.btn-expense {
+    background-color: var(--accent-red);
+}
+
+.income-form-box {
+    border-top: 3px solid var(--accent-green);
+}
+
+.expense-form-box {
+    border-top: 3px solid var(--accent-red);
+}
+
+.list-container {
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.income-card {
+    background-color: rgba(35, 134, 54, 0.15);
+    border-left: 4px solid var(--accent-green);
+}
+
+.expense-card {
+    background-color: rgba(218, 54, 51, 0.15);
+    border-left: 4px solid var(--accent-red);
+}
+
+
+@media (max-width: 1100px) {
+    .page-wrapper {
+        grid-template-columns: 1fr;
+        padding-top: 20px !important;
+    }
+
+    .sidebar {
+        position: static;
+        order: 1;
+    }
+
+    .main-content {
+        order: 2;
+    }
+
+    .endOfTheDayContent h1 {
+        font-size: 2rem;
     }
 }

@@ -32,7 +32,28 @@ const getUserIncomes = async (userId) => {
     }
 };
 
+const getTodayIncomes = async (userId) => {
+    try {
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999);
+
+        const incomes = await Income.find({
+            userId: userId,
+            createdAt: { $gte: startOfDay, $lte: endOfDay }
+        });
+
+        return incomes;
+    } catch (error) {
+        console.error('Bugünün gelirleri çekilirken hata:', error.message);
+        return [];
+    }
+};
+
 module.exports = {
     addIncome,
-    getUserIncomes
+    getUserIncomes,
+    getTodayIncomes 
 };
