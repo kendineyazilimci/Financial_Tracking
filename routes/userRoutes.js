@@ -5,9 +5,13 @@ const {
     registerUser, 
     loginUser, 
     logoutUser, 
-    getTodayPage, 
     handleAddExpense,
-    handleAddIncome
+    handleAddIncome,
+    handleDeleteExpense,
+    handleDeleteIncome,
+    getTodayPage, 
+    getMonthPage,
+    getYearPage
 } = require('../controllers/userController');
 
 const navbarLinks = [
@@ -31,13 +35,12 @@ router.get("/", (req, res) => {
 
 router.get('/today', getTodayPage);
 
-router.get("/thismonth", (req, res) => {
-    res.render('userViews/thismonth.ejs');
-});
+router.get("/thismonth", getMonthPage);
 
-router.get("/thisyear", (req, res) => {
-    res.render('userViews/thisyear.ejs');
-});
+router.get("/thisyear", getYearPage);
+
+router.get('/delete-expense/:id', handleDeleteExpense);
+router.get('/delete-income/:id', handleDeleteIncome);
 
 router.get("/signup", (req, res) => {
     res.render('loginSignup/signUp.ejs');

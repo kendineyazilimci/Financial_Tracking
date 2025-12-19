@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Month Expenses</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <%- include('../partials/navbar') %>
+
+    <div class="page-wrapper full-width">
+
+        <main class="main-content">
+            
+            <div class="content-section endOfTheMonth">
+                <h1>Ay Sonu Kalan</h1>
+                <div class="endOfTheDayContent">
+                    <% let balance = totalIncome - totalExpense; %>
+                    <h1 class="<%= balance >= 0 ? 'positive-balance' : 'negative-balance' %>">
+                        <%= balance %> TL
+                    </h1>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                
+                <div class="content-section monthIncomes">
+                    <h1>Bu Ayki Gelirler</h1>
+                    <div class="list-container">
+                        <% const incomeCategories = groupedIncomes ? Object.keys(groupedIncomes) : []; %>
+                        
+                        <% if (incomeCategories.length > 0) { %>
+                            <% incomeCategories.forEach(categoryName => { %>
+                                
+                                <div class="category-group-card income-group">
+                                    <div class="group-header">
+                                        <h2 class="category-title"><%= categoryName %></h2>
+                                        <h2 class="category-total">+<%= groupedIncomes[categoryName].totalAmount %> TL</h2>
+                                    </div>
+
+                                    <div class="group-items">
+                                        <% groupedIncomes[categoryName].items.forEach(item => { %>
+                                            <div class="single-item">
+                                                <span class="item-desc"><%= item.description %></span>
+                                                <div class="item-right">
+                                                    <span class="item-amount"><%= item.amount %> TL</span>
+                                                    <a href="/delete-income/<%= item.id %>" class="btn-mini-delete">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        <% }) %>
+                                    </div>
+                                </div>
+
+                            <% }) %>
+                        <% } else { %>
+                            <p class="empty-message">Bu ay gelir yok.</p>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="content-section monthExpenses">
+                    <h1>Bu Ayki Giderler</h1>
+                    <div class="list-container">
+                        <% const expenseCategories = groupedExpenses ? Object.keys(groupedExpenses) : []; %>
+                        
+                        <% if (expenseCategories.length > 0) { %>
+                            <% expenseCategories.forEach(categoryName => { %>
+                                
+                                <div class="category-group-card expense-group">
+                                    <div class="group-header">
+                                        <h2 class="category-title"><%= categoryName %></h2>
+                                        <h2 class="category-total">-<%= groupedExpenses[categoryName].totalAmount %> TL</h2>
+                                    </div>
+
+                                    <div class="group-items">
+                                        <% groupedExpenses[categoryName].items.forEach(item => { %>
+                                            <div class="single-item">
+                                                <span class="item-desc"><%= item.description %></span>
+                                                <div class="item-right">
+                                                    <span class="item-amount"><%= item.amount %> TL</span>
+                                                    <a href="/delete-expense/<%= item.id %>" class="btn-mini-delete">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        <% }) %>
+                                    </div>
+                                </div>
+
+                            <% }) %>
+                        <% } else { %>
+                            <p class="empty-message">Bu ay harcama yok.</p>
+                        <% } %>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

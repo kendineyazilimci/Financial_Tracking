@@ -15,6 +15,21 @@ const addExpense = async (userId, amount, category, description) => {
     }
 };
 
+const deleteExpense = async (userId, expenseId) => {
+    try {
+        const result = await Expense.findOneAndDelete({ _id: expenseId, userId: userId });
+        
+        if (result) {
+            console.log('Harcama silindi:', result.description);
+        } else {
+            console.log('Silinecek harcama bulunamadı veya yetki yok.');
+        }
+        return result;
+    } catch (error) {
+        console.error('Harcama silinirken hata:', error.message);
+    }
+};
+
 const getUserExpenses = async (userId) => {
     try {
         const expenses = await Expense.find({ userId });
@@ -51,8 +66,49 @@ const getTodayExpenses = async (userId) => {
     }
 };
 
+const getMonthExpenses = async (userId) => {
+    try {
+        const startOfMonth = new Date();
+        startOfMonth.setDate(1);
+        startOfMonth.setHours(0, 0, 0, 0);
+        const endOfMonth = new Date();
+        endOfMonth.setMonth(endOfMonth.getMonth() + 1);
+        endOfMonth.setDate(0);
+        endOfMonth.setHours(23, 59, 59, 999);
+
+        const expenses = await Expense.find({
+            userId: userId,
+            createdAt: { $gte: startOfMonth, $lte: endOfMonth }
+        });
+        return expenses;
+    } catch (error) {
+        console.error('Ayın harcamaları çekilirken hata:', error.message);
+        return [];
+    }
+};
+
+const getYearExpenses = async (userId) => {
+    try {
+        const startOfYear = new Date(new Date().getFullYear(), 0, 1);
+        startOfYear.setHours(0, 0, 0, 0);
+        const endOfYear = new Date(new Date().getFullYear(), 11, 31);
+        endOfYear.setHours(23, 59, 59, 999);
+        const expenses = await Expense.find({
+            userId: userId,
+            createdAt: { $gte: startOfYear, $lte: endOfYear }
+        });
+        return expenses;
+    } catch (error) {
+        console.error('Yılın harcamaları çekilirken hata:', error.message);
+        return [];
+    }
+};
+
 module.exports = {
     addExpense,
+    deleteExpense,
     getUserExpenses,
-    getTodayExpenses
+    getTodayExpenses,
+    getMonthExpenses,
+    getYearExpenses
 };

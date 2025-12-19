@@ -16,6 +16,21 @@ const addIncome = async (userId, amount, category, description) => {
     }
 };
 
+const deleteIncome = async (userId, incomeId) => {
+    try {
+        const result = await Income.findOneAndDelete({ _id: incomeId, userId: userId });
+
+        if (result) {
+            console.log('Gelir silindi:', result.description);
+        } else {
+            console.log('Silinecek gelir bulunamadı veya yetki yok.');
+        }
+        return result;
+    } catch (error) {
+        console.error('Gelir silinirken hata:', error.message);
+    }
+};
+
 const getUserIncomes = async (userId) => {
     try {
         const incomes = await Income.find({ userId });
@@ -51,9 +66,47 @@ const getTodayIncomes = async (userId) => {
         return [];
     }
 };
+const getMonthIncomes = async (userId) => {
+    try {
+        const startOfMonth = new Date();
+        startOfMonth.setDate(1);
+        startOfMonth.setHours(0, 0, 0, 0);
+        const endOfMonth = new Date();
+        endOfMonth.setMonth(endOfMonth.getMonth() + 1);
+        endOfMonth.setDate(0);
+        endOfMonth.setHours(23, 59, 59, 999);
+        const incomes = await Income.find({
+            userId: userId,
+            createdAt: { $gte: startOfMonth, $lte: endOfMonth }
+        });
+        return incomes;
+    } catch (error) {
+        console.error('Ayın gelirleri çekilirken hata:', error.message);
+        return [];
+    }
+};
+
+const getYearIncomes = async (userId) => {
+    try {
+        const startOfYear = new Date(new Date().getFullYear(), 0, 1);
+        const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59, 999);
+
+        const incomes = await Income.find({
+            userId: userId,
+            createdAt: { $gte: startOfYear, $lte: endOfYear }
+        });
+        return incomes;
+    } catch (error) {
+        console.error('Yılın gelirleri çekilirken hata:', error.message);
+        return [];
+    }   
+};
 
 module.exports = {
     addIncome,
+    deleteIncome,
     getUserIncomes,
-    getTodayIncomes 
+    getTodayIncomes,
+    getMonthIncomes,
+    getYearIncomes
 };
